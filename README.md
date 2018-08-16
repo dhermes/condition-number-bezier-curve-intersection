@@ -1,6 +1,6 @@
 # A Condition Number for B&#xe9;zier Curve Intersection
 
-This originally appeared in my [thesis] and is now being split out
+This originally appeared in my [thesis][1] and is now being split out
 into a (short) standalone paper.
 
 This repository is laid out in a manner described in
