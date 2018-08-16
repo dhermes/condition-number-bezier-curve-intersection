@@ -1,0 +1,286 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage[margin=1in]{geometry}
+
+\usepackage{amsthm,amssymb,amsmath}
+\usepackage{bm}
+%% H/T: https://tex.stackexchange.com/a/28334/32270
+\usepackage{chngcntr}
+\counterwithin{equation}{section}
+%% H/T: https://tex.stackexchange.com/a/71153/32270
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=MidnightBlue,
+  citecolor=ForestGreen,
+  pdfinfo={
+    CreationDate={D:20180816104534},
+    ModDate={D:20180816104534},
+  },
+}
+
+\usepackage{embedfile}
+\embedfile{\jobname.tex}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{A Curious Case of Curbed Condition}
+\rhead{Danny Hermes}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\qed}{\(\blacksquare\)}
+\newcommand{\reals}{\mathbf{R}}
+\newcommand{\bigO}[1]{\mathcal{O}\left(#1\right)}
+\newcommand{\eps}{\varepsilon}
+
+\begin{document}
+
+\begin{abstract}
+\noindent We present a short note describing a condition number
+of the intersection of two B\'{e}zier curves. Since tangent
+intersections are to transversal intersections as multiple roots are
+to simple roots of a function, this condition number is infinite
+for non-transveral intersections.
+\\ \\
+\noindent \textit{Keywords}: B\'{e}zier curve, Curve intersection,
+Condition number
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+Placeholder
+
+\section{Problem conditioning}\label{sec:conditioning}
+
+Consider a smooth function \(F: \reals^n \longrightarrow \reals^n\)
+with Jacobian \(F_{\bm{x}} = J\). We want to consider a special class of
+functions of the form \(F\left(\bm{x}\right) = \sum_j c_j
+\phi_j\left(\bm{x}\right)\) where the basis
+functions \(\phi_j\) are also smooth functions on \(\reals^n\)
+and each \(c_j \in \reals\). We want to consider the effects on a root
+\(\bm{\alpha} \in \reals^n\) of a perturbation in one of the
+coefficients \(c_j\). We examine the perturbed functions
+\begin{equation}
+G(x, \delta) = F\left(\bm{x}\right) + \delta \phi_j\left(\bm{x}\right).
+\end{equation}
+Since \(G\left(\bm{\alpha}, 0\right) = \bm{0}\), if \(J^{-1}\) exists at
+\(\bm{x} = \bm{\alpha}\) then
+the implicit function theorem tells us that we can define
+\(\bm{x}\) via
+\begin{equation}
+G\left(\bm{x}\left(\delta\right), \delta\right) = \bm{0}.
+\end{equation}
+Taking the derivative with respect to \(\delta\) we find that
+\(\bm{0} = G_{\bm{x}} \bm{x}_{\delta} + G_{\delta}\). Plugging in
+\(\delta = 0\) we find that \(0 = J\left(\bm{\alpha}\right) \bm{x}_{\delta} +
+\phi_j\left(\bm{\alpha}\right)\), hence we
+conclude that
+\begin{equation}
+\bm{x}\left(\delta\right) = \bm{\alpha} - J\left(\bm{\alpha}\right)^{-1}
+  \phi_j\left(\bm{\alpha}\right) \delta + \bigO{\delta^2}.
+\end{equation}
+This gives a relative condition number (for the root) of
+\begin{equation}
+\frac{\left \lVert J\left(\bm{\alpha}\right)^{-1}
+  \phi_j\left(\bm{\alpha}\right) \right \rVert}{
+  \left \lVert \bm{\alpha} \right \rVert}.
+\end{equation}
+
+By considering perturbations in \emph{all} of the coefficients:
+\(\left|\delta_j\right| \leq \eps \left|c_j\right|\), a similar analysis
+gives a root function
+\begin{equation}
+\bm{x}\left(\delta_0, \ldots, \delta_n\right) = \bm{\alpha} -
+  J\left(\bm{\alpha}\right)^{-1} \sum_{j = 0}^n \delta_j
+  \phi_j\left(\bm{\alpha}\right) + \bigO{\eps^2}.
+\end{equation}
+With this, we can define a root condition number
+\begin{equation}\label{eq:abstract-cond-num}
+\kappa_{\bm{\alpha}} =
+  \lim_{\eps \to 0} \left(\sup \frac{\left \lVert\delta \bm{\alpha}
+  \right \rVert / \eps}{\left \lVert\bm{\alpha}\right \rVert}\right) =
+  \lim_{\eps \to 0} \left(\sup \frac{\left \lVert
+  J\left(\bm{\alpha}\right)^{-1} \sum_j \delta_j
+  \phi_j\left(\bm{\alpha}\right) \right \rVert / \eps}{
+  \left \lVert\bm{\alpha}\right \rVert}\right).
+\end{equation}
+
+When \(n = 1\), \(J^{-1}\) is simply \(1 / F'\) and we find
+\begin{equation}
+\kappa_{\alpha} =
+  \frac{1}{\left|\alpha F'(\alpha)\right|} \sum_{j = 0}^n \left|
+  c_j \phi_j(\alpha)\right|.
+\end{equation}
+This value is given by the triangle inequality applied to
+\(\delta \alpha\)  and equality can be attained since the sign
+of each \(\delta_j = \pm c_j \eps\) can be modified at will to make
+\(\phi_j(\alpha) \delta_j = \left|\phi_j(\alpha) c_j\right| \eps\).
+
+When \(n > 1\), the triangle inequality tells us that
+\begin{equation}
+\kappa_{\bm{\alpha}} =
+  \lim_{\eps \to 0} \left(\sup \frac{\left \lVert\delta \bm{\alpha} /
+  \eps\right \rVert}{\left \lVert\bm{\alpha}\right \rVert}\right) \leq
+  \frac{1}{\left \lVert\bm{\alpha}\right \rVert} \sum_{j = 0}^n
+  \left|c_j\right| \left \lVert J\left(\bm{\alpha}\right)^{-1}
+  \phi_j(\bm{\alpha})\right \rVert.
+\end{equation}
+However, this bound is only attainable if all
+\(\phi_j(\bm{\alpha})\) are parallel. However, we'll seldom need to
+compute the exact condition number and are instead typically
+interested in the order of magnitude. In this case a lower
+bound
+\begin{equation}
+\frac{1}{\left \lVert\bm{\alpha}\right \rVert}
+\max_j \left|c_j\right| \left \lVert J\left(\bm{\alpha}\right)^{-1}
+\phi_j(\bm{\alpha})\right \rVert
+\end{equation}
+for \(\kappa_{\bm{\alpha}}\)
+will suffice as an approximate condition number.
+
+For an example, consider
+\begin{equation}
+\phi_0 = \left[ \begin{array}{c} x_0 \\ 2 \\ 0 \end{array}\right],
+\phi_1 = \left[ \begin{array}{c} 0 \\ x_1 \\ 3 \end{array}\right],
+\phi_2 = \left[ \begin{array}{c} 2 \\ 0 \\ x_2 \end{array}\right],
+F = \phi_0 + 2 \phi_1 + 3 \phi_2,
+\bm{\alpha} = \left[ \begin{array}{c} -6 \\ -1 \\ -2 \end{array}\right].
+\end{equation}
+For a given \(\eps\), the maximum root perturbation occurs when
+\(\delta_0 = \eps, \delta_1 = 2 \eps, \delta_2 = -3 \eps\) and
+gives
+\(\left \lVert J\left(\bm{\alpha}\right)^{-1} \sum_j
+\delta_j \phi_j\left(\bm{\alpha}\right) \right \rVert
+= 4 \sqrt{10} \eps \approx 12.65 \eps\).
+The pessimistic triangle inequality bound gives
+\(\sum_j \left|c_j\right| \left \lVert J\left(\bm{\alpha}\right)^{-1}
+\phi_j(\bm{\alpha})\right \rVert \approx 14.64 \eps\) and the
+maximum individual perturbation is \(2 \sqrt{10} \eps \approx 6.325 \eps\)
+(this occurs when \(\delta_0 = \delta_1 = 0, \delta_2 = \pm 3 \eps\)).
+
+In this general framework, we can define a condition number both
+for a simple root of a polynomial in Bernstein form and for the
+intersection of two planar B\'{e}zier curves. For the first,
+\(\phi_j(s) = \binom{n}{j} (1 - s)^{n - j} s^j\) the Bernstein basis
+functions, a polynomial \(p(s) = \sum_j b_j \phi_j(s)\) with
+a simple root \(\alpha \in \left(0, 1\right]\) has root condition number
+\begin{equation}
+\kappa_{\alpha} =
+  \frac{1}{\alpha \left|p'(\alpha)\right|} \sum_{j = 0}^n \left|
+  b_j \phi_j(\alpha)\right| = \frac{\widetilde{p}(\alpha)}{
+  \alpha \left|p'(\alpha)\right|}.
+\end{equation}
+For the intersection of a degree \(m\) curve \(b_1(s)\) and
+a degree \(n\) curve \(b_2(t)\), we have basis functions
+\begin{multline}
+\phi_{0, -1, 1} = \left[ \begin{array}{c} B_{0, m}(s) \\ 0 \end{array}\right],
+\phi_{0, -1, 2} = \left[ \begin{array}{c} 0 \\ B_{0, m}(s) \end{array}\right],
+\cdots, \\
+\phi_{m, -1, 1} = \left[ \begin{array}{c} B_{m, m}(s) \\ 0 \end{array}\right],
+\phi_{m, -1, 2} = \left[ \begin{array}{c} 0 \\
+  B_{m, m}(s) \end{array}\right], \\
+\phi_{-1, 0, 1} = \left[ \begin{array}{c} -B_{0, n}(t) \\
+  0 \end{array}\right],
+\phi_{-1, 0, 2} = \left[ \begin{array}{c} 0 \\
+  -B_{0, n}(t) \end{array}\right], \cdots, \\
+\phi_{-1, n, 1} = \left[ \begin{array}{c} -B_{n, n}(t) \\
+  0 \end{array}\right], \phi_{-1, n, 2} = \left[ \begin{array}{c} 0 \\
+  -B_{n, n}(t) \end{array}\right].
+\end{multline}
+Since \(F(s, t) = b_1(s) - b_2(t)\) we have Jacobian \(J(s, t) =
+\left[ \begin{array}{c c} b_1'(s) & -b_2'(t) \end{array}\right]\). We'll
+consider a transversal intersection \(F(\alpha, \beta) = \bm{0}\) with
+\(\det J(\alpha, \beta) \neq 0\). Since each of the
+\(\phi_j\) is just a scalar multiple of the standard basis
+vectors, writing \(J^{-1} = \left[ \begin{array}{c c}
+\bm{v}_1 & \bm{v}_2 \end{array}\right]\), we have
+\begin{multline}
+J\left(\alpha, \beta\right)^{-1} \sum_{\bm{j}} \delta_{\bm{j}}
+  \phi_{\bm{j}}\left(\alpha, \beta\right) = \left[\sum_{i = 0}^m
+  \delta_{i, -1, 1} B_{i, m}\left(\alpha\right) + \sum_{j = 0}^n
+  \delta_{-1, j, 1} B_{j, n}\left(\beta\right)\right] \bm{v}_1 \\
++ \left[\sum_{i = 0}^m
+  \delta_{i, -1, 2} B_{i, m}\left(\alpha\right) + \sum_{j = 0}^n
+  \delta_{-1, j, 2} B_{j, n}\left(\beta\right)\right] \bm{v}_2 =
+  \nu_1 \bm{v}_1 + \nu_2 \bm{v}_2.
+\end{multline}
+where
+\begin{equation}\label{eq:nu-bounds}
+\left|\nu_k\right| / \eps \leq \sum_{i = 0}^m
+  \left|c_{i, -1, k}\right| B_{i, m}\left(\alpha\right) + \sum_{j = 0}^n
+  \left|c_{-1, j, k}\right| B_{j, n}\left(\beta\right) = \mu_k
+\end{equation}
+and the bound can be attained for both \(k = 1, 2\) by making the
+signs of the \(\delta_{\bm{j}}\) agree. If we name the components of each
+curve via
+\(b_1(s) = \left[ \begin{array}{c c} x_1(s) & y_1(s) \end{array}\right]^T\)
+and \(b_2(t) = \left[ \begin{array}{c c} x_2(t) & y_2(t) \end{array}\right]^T\)
+then we see that \(\mu_1 = \widetilde{x}_1(\alpha) + \widetilde{x}_2(\beta)\)
+and \(\mu_2 = \widetilde{y}_1(\alpha) + \widetilde{y}_2(\beta)\).
+Thus we have condition number
+\begin{align}
+\kappa_{\alpha, \beta} &= \frac{1}{\sqrt{\alpha^2 + \beta^2}}
+  \max_{\left|\nu_k\right| \leq \mu_k} \left \lVert \nu_1 \bm{v}_1 +
+  \nu_2 \bm{v}_2 \right \rVert_2 \\
+  &=
+  \sqrt{\frac{\max_{\left|\nu_k\right| \leq \mu_k}
+  \nu_1^2 \left(\bm{v}_1 \cdot \bm{v}_1\right) +
+  2 \nu_1 \nu_2 \left(\bm{v}_1 \cdot \bm{v}_2\right) +
+  \nu_2^2 \left(\bm{v}_2 \cdot \bm{v}_2\right)}{\alpha^2 + \beta^2}}
+  \label{eq:intersect-cond-num}.
+\end{align}
+Since \(J^{-1}\) is invertible, we know \(\bm{v}_1\) and \(\bm{v}_2\) are
+not parallel which can be used to show that the only internal critical
+point of the function to be maximimized in~\eqref{eq:intersect-cond-num}
+is \(\nu_1 = \nu_2 = 0\), which is the global minimum. Along the boundary of
+the rectangle
+\(\left[-\mu_1, \mu_1\right] \times \left[-\mu_2, \mu_2\right]\),
+we fix one of \(\nu_1\) or \(\nu_2\) and the resulting univariate function is
+an up-opening parabola, hence any critical point must be a local
+minimum. Thus we know the maximum occurs at two of the four corners of the
+rectangle:
+\begin{equation}\label{eq:intersect-cond-num-too}
+\kappa_{\alpha, \beta} = \sqrt{\frac{\mu_1^2
+  \left(\bm{v}_1 \cdot \bm{v}_1\right) +
+  2 \mu_1 \mu_2 \left|\bm{v}_1 \cdot \bm{v}_2\right| +
+  \mu_2^2 \left(\bm{v}_2 \cdot \bm{v}_2\right)}{\alpha^2 + \beta^2}}.
+\end{equation}
+
+As far as the author can tell,
+a condition number for the intersection of two planar B\'{e}zier curves
+has not been described in the Computer Aided Geometric Design (CAGD)
+literature. In \cite[Chapter~25, Equation 25.11]{Higham2002}
+a more generic condition number is defined for the root of a nonlinear
+algebraic system that is similar to the definition above.
+
+For an example, consider the line
+\(b_1(s) = \left[ \begin{array}{c c} 2s & 2s \end{array}\right]^T\)
+and improperly parameterized line
+\(b_2(t) = \left[ \begin{array}{c c} 4t^2 & 2 - 4t^2
+\end{array}\right]^T\) which intersect at \(\alpha = \beta = 1/2\).
+At the intersection we have \(J^{-1} = \frac{1}{8}
+\left[ \begin{array}{c c} 2 & 2 \\ -1 & 1 \end{array}\right]\),
+so that \(\bm{v}_1 \cdot \bm{v}_1 = \bm{v}_2 \cdot \bm{v}_2 =
+5/64\) and \(\bm{v}_1 \cdot \bm{v}_2 = 3/64\). Since the
+\(x\)-component of \(F(s, t)\) can be written as
+\(2s - 4t^2 = 2 B_{1, 1}(s) - 4 B_{2, 2}(t)\) and the
+\(y\)-component as \(2s + 4t^2 - 2 = 2 B_{1, 1}(s) - 2 B_{0, 2}(t)
+- 2 B_{1, 2}(t) + 2 B_{2, 2}(t)\) we have
+\begin{alignat}{2}
+\mu_1 &= 2 B_{1, 1}(\alpha) &&+ 4 B_{2, 2}(\beta) = 2 \\
+\mu_2 &= 2 B_{1, 1}(\alpha) + 2 B_{0, 2}(\beta) +
+  2 B_{1, 2}(\beta) &&+ 2 B_{2, 2}(\beta) = 3.
+\end{alignat}
+Following~\eqref{eq:intersect-cond-num-too}, this gives
+\(\kappa_{\alpha, \beta} = \sqrt{202}/8 \approx 1.78\).
+
+\bibliography{paper}
+\bibliographystyle{alpha}
+
+\end{document}
