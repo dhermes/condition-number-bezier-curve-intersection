@@ -78,5 +78,5 @@ def build_tex(session):
         session,
         "paper",
         "608646FC6AEA50B9AB4A218D45189E6A",
-        extensions=(),
+        extensions=("aux", "bbl", "blg", "log", "out", "toc"),
     )
