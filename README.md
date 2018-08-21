@@ -1,7 +1,7 @@
 # A Condition Number for B&#xe9;zier Curve Intersection
 
-This originally appeared in my [thesis][1] and is now being split out
-into a (short) standalone paper.
+This originally appeared in my [thesis][1] and is now split out
+into a (short) standalone [paper][3] ([posted][4] on the arXiv).
 
 This repository is laid out in a manner described in
 [Good Enough Practices in Scientific Computing][2].
@@ -37,3 +37,5 @@ To run ``nox -s build_tex`` (i.e. to build the PDF), ``pdflatex`` and
 
 [1]: https://github.com/dhermes/phd-thesis
 [2]: https://arxiv.org/abs/1609.00037
+[3]: doc/paper.pdf
+[4]: https://arxiv.org/abs/1808.06126
