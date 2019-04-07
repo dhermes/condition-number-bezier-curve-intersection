@@ -23,7 +23,6 @@ import py.path
 
 
 NOX_DIR = os.path.abspath(os.path.dirname(__file__))
-SINGLE_INTERP = "python3.7"
 
 
 def get_path(*names):
@@ -59,18 +58,13 @@ def build_tex_file(session, base, new_id, extensions=()):
     session.run("python", modify_id, "--base", path, "--id", new_id)
 
 
-@nox.session
+@nox.session(py=False)
 def build_tex(session):
-    session.interpreter = SINGLE_INTERP
-
     if py.path.local.sysfind("pdflatex") is None:
         session.skip("`pdflatex` must be installed")
 
     if py.path.local.sysfind("bibtex") is None:
         session.skip("`bibtex` must be installed")
-
-    # No need to create a virtualenv.
-    session.virtualenv = False
 
     session.chdir(get_path("doc"))
 
