@@ -1,6 +1,5 @@
-\documentclass[letterpaper,10pt]{article}
-
-\usepackage[margin=1in]{geometry}
+\documentclass[3p, authoryear, square]{elsarticle}
+\bibliographystyle{elsarticle-harv}
 
 \usepackage{amsthm,amssymb,amsmath}
 %% https://tex.stackexchange.com/a/396829/32270
@@ -9,8 +8,10 @@
 %% H/T: https://tex.stackexchange.com/a/28334/32270
 \usepackage{chngcntr}
 \counterwithin{equation}{section}
-%% H/T: https://tex.stackexchange.com/a/71153/32270
-\usepackage[nottoc,notlot,notlof]{tocbibind}
+%% H/T: https://tex.stackexchange.com/a/26348/32270
+\renewcommand*{\appendixname}{}
+%% H/T: https://tex.stackexchange.com/a/23242/32270
+\renewcommand*{\today}{April 7, 2019}
 
 \theoremstyle{definition}
 \newtheorem{theorem}{Theorem}[section]
@@ -20,40 +21,44 @@
 \usepackage{hyperref}
 \hypersetup{
   colorlinks=true,
-  urlcolor=blue,
-  linkcolor=MidnightBlue,
-  citecolor=ForestGreen,
   pdfinfo={
     CreationDate={D:20180816104534},
     ModDate={D:20180816104534},
   },
 }
 
-\usepackage{embedfile}
-\embedfile{\jobname.tex}
-
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\lhead{A 2-Norm Condition Number for B\'{e}zier Curve Intersection}
-\rhead{Danny Hermes}
-
-\renewcommand{\headrulewidth}{0pt}
 \renewcommand{\qed}{\(\blacksquare\)}
 \newcommand{\reals}{\mathbf{R}}
 \newcommand{\bigO}[1]{\mathcal{O}\left(#1\right)}
 \newcommand{\eps}{\varepsilon}
 
+\journal{Computer Aided Geometric Design}
+
 \begin{document}
+%% H/T: https://tex.stackexchange.com/a/263503/32270
+\hypersetup{
+  urlcolor=MidnightBlue,
+  linkcolor=MidnightBlue,
+  citecolor=ForestGreen,
+}
+
+\begin{frontmatter}
+
+\title{A 2-Norm Condition Number for B\'{e}zier Curve Intersection}
+\author[djh]{Danny Hermes}\ead{dhermes@berkeley.edu}
+\address[djh]{UC Berkeley, 970 Evans Hall \#3840, Berkeley, CA 94720-3840 USA}
 
 \begin{abstract}
-\noindent We present a short note describing a condition number
+We present a short note describing a condition number
 of the intersection of two B\'{e}zier curves.
-\\ \\
-\noindent \emph{Keywords}: B\'{e}zier curve, Curve intersection,
-Condition number, Numerical analysis
 \end{abstract}
 
-\tableofcontents
+\begin{keyword}
+B\'{e}zier curve \sep Curve intersection \sep Condition number \sep
+Numerical analysis
+\end{keyword}
+
+\end{frontmatter}
 
 \section{Introduction}
 
@@ -114,7 +119,7 @@ the (absolute) condition number of evaluation is
 \(\widetilde{p}(s) = \sum_{j = 0}^n \left|p_j\right| B_{j, n}(s)\)
 (\cite{Farouki1987}) when the parameter \(s\) is in the unit interval.
 
-\section{Conditioning of Generic Root-finding}
+\section{Conditioning of Generic Root-finding}\label{sec:generic}
 
 Consider a smooth function \(F: \reals^n \longrightarrow \reals^n\)
 with Jacobian \(F_{\bm{x}} = J\). We want to consider a special class of
@@ -347,7 +352,7 @@ were the zero vector we'd have \(\det J = 0\).
 Since \(\theta\) is an up-opening parabola along the boundary, any critical
 point must be a local minimum.
 
-Thus we know the maximum occurs at two of the four corners of the
+Thus we know the maximum occurs at one of the four corners of the
 rectangle. Due to sign cancellation, this leads to one of two values
 \(\theta =
 \mu_1^2 \left(\bm{v} \cdot \bm{v}\right) \pm
@@ -372,8 +377,10 @@ Note that \(\widetilde{F}_{\pm} = \left[ \begin{array}{c} \mu_1 \\ \pm \mu_2
   2 \mu_1 \mu_2 \left(\bm{v} \cdot \bm{w}\right) +
   \mu_2^2 \left(\bm{w} \cdot \bm{w}\right)}
 \end{equation}
-gives each of the two values that produce the maximum value.
+gives each of the two values that could produce the maximum value.
 \end{proof}
+
+\section{Condition Number in Practice}
 
 \subsection{Transversal Intersection}
 
@@ -397,8 +404,9 @@ so that \(\bm{v} \cdot \bm{v} = \bm{w} \cdot \bm{w} =
 \end{alignat}
 Following~\eqref{eq:intersect-cond-num-too}, this gives
 \(\kappa_{\alpha, \beta} = \sqrt{202}/8 \approx 1.78\).
-This low condition number is somewhat unexpected since when using
-the resultant to eliminate each parameter, one of the two roots is
+This low condition number is expected from a geometric point of view; i.e.
+the intersection is a transversal intersection of two lines. However,
+when using the resultant to eliminate each parameter, one of the two roots is
 a double root:
 \begin{align}
 \operatorname{Res}_t\left(x_0(s) - x_1(t), y_0(s) - y_1(t)\right) &=
@@ -406,6 +414,8 @@ a double root:
 \operatorname{Res}_s\left(x_0(s) - x_1(t), y_0(s) - y_1(t)\right) &=
   4(2t - 1)(2t + 1).
 \end{align}
+so an algebraic approach may lead to an incorrect conclusion that the
+intersection is ill-conditioned.
 
 \subsection{Line-line Intersection with Poorly Behaved Coefficients}
 
@@ -432,7 +442,7 @@ and in either case \(\left \lVert J^{-1} \widetilde{F}_{\pm} \right \rVert_2 =
 
 So, we see the condition number \(\kappa_{\alpha, \beta} = \sqrt{2}(2D + 1)\)
 increases towards infinity as \(D\) does. This is what we expect as the
-coefficients grow so large that their ratio approaches \(1\).
+coefficients grow so large that their ratio \((1 + D) / D\) approaches \(1\).
 
 \subsection{Family of Lines Approaching Coincident}
 
@@ -456,7 +466,28 @@ and again have a condition number
 \end{equation}
 that increases towards infinity as the parameter \(r \longrightarrow 0^+\).
 
+\section{Conclusion and Future Work}
+
+The author hopes that this can be useful for evaluating and comparing the
+performance of curve intersection implementations. By establishing a
+straightforward and easy to compute closed form, the condition number can be
+used more often to differentiate between cases where the algorithm or computer
+code is at fault for loss in accuracy and cases where the conditioning of the
+intersection itself is the cause. The framework set forth in
+Section~\ref{sec:generic} can be applied in future work to compute the
+condition number of higher order intersections such as surface-surface
+intersections in \(\reals^3\).
+
+\section{Acknowledgements}
+
+The author would like to thank Professor Tom Sederberg for his useful
+course notes (\cite{SederbergNotes}) that provide a useful introduction to
+intersection methods as well as the survey \cite{Sederberg1986}. Additionally
+\cite{Farouki1987} served as a great baseline when considering conditioning
+of operations on B\'{e}zier Curves.
+
+%% H/T: https://tex.stackexchange.com/a/137379/32270
+\section*{\refname}
 \bibliography{paper}
-\bibliographystyle{alpha}
 
 \end{document}
