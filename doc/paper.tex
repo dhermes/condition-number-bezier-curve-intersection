@@ -118,7 +118,9 @@ polynomial in Bernstein form. For such a polynomial
 p(s) = \sum_{j = 0}^n p_j B_{j, n}(s)
 \end{equation}
 the (absolute) condition number of evaluation is
-\(\widetilde{p}(s) = \sum_{j = 0}^n \left|p_j\right| B_{j, n}(s)\)
+\begin{equation}\label{eq:p-tilde}
+\widetilde{p}(s) = \sum_{j = 0}^n \left|p_j\right| B_{j, n}(s)
+\end{equation}
 (\cite{Farouki1987}) when the parameter \(s\) is in the unit interval.
 
 \section{Conditioning of Generic Root-finding}\label{sec:generic}
@@ -259,6 +261,8 @@ B\'{e}zier curves \(b_0(s)\) and \(b_1(t)\). Define the vectors
   \widetilde{x}_0(\alpha) + \widetilde{x}_1(\beta) \\
   -\widetilde{y}_0(\alpha) - \widetilde{y}_1(\beta)\end{array}\right].
 \end{equation}
+where the \(\widetilde{x}_i, \widetilde{y}_j\) are as defined in
+\eqref{eq:p-tilde}.
 Then the root condition number of the intersection is the
 greater of two vector norms:
 \begin{equation}\label{eq:kappa-max}
