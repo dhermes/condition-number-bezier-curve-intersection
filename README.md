@@ -18,7 +18,7 @@ for non-transveral intersections.
 
 The code used to build the manuscript, generate images and verify
 computations is written in Python. To run the code, Python 3.7
-should be installed, along with ``nox-automation``:
+should be installed, along with ``nox``:
 
 ```
 python -m pip install --upgrade 'nox >= 2018.10.17' 'py >= 1.6.0'
