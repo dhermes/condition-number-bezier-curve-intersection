@@ -1,10 +1,14 @@
 # A Condition Number for B&#xe9;zier Curve Intersection
 
 This originally appeared in my [thesis][1] and is now split out
-into a (short) standalone [paper][3] ([posted][4] on the arXiv).
+into a (short) standalone [paper][3].
 
 This repository is laid out in a manner described in
 [Good Enough Practices in Scientific Computing][2].
+
+The content itself has been uploaded to the [arXiv][4] and was submitted to
+the journal [CAGD][5] in April 2019. The submission received reviewer comments
+in June 2019 and a second revision has been submitted to the journal.
 
 ## Abstract
 
@@ -39,3 +43,4 @@ To run ``nox -s build_tex`` (i.e. to build the PDF), ``pdflatex`` and
 [2]: https://arxiv.org/abs/1609.00037
 [3]: doc/paper.pdf
 [4]: https://arxiv.org/abs/1808.06126
+[5]: https://www.journals.elsevier.com/computer-aided-geometric-design
