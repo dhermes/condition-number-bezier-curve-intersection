@@ -261,7 +261,7 @@ B\'{e}zier curves \(b_0(s)\) and \(b_1(t)\). Define the vectors
 \end{equation}
 Then the root condition number of the intersection is the
 greater of two vector norms:
-\begin{equation}
+\begin{equation}\label{eq:kappa-max}
 \kappa_{\alpha, \beta} = \frac{1}{\sqrt{\alpha^2 + \beta^2}} \max \left\{
 \left \lVert J\left(\alpha, \beta\right)^{-1} \widetilde{F}_{+}\right \rVert_2,
 \left \lVert J\left(\alpha, \beta\right)^{-1} \widetilde{F}_{-}\right \rVert_2
@@ -270,8 +270,8 @@ greater of two vector norms:
 \end{theorem}
 
 \begin{proof}
-Let the curve \(b_0(s)\) be degree \(m\) and \(b_1(t)\) be degree \(n\).
-Then \(F(s, t)\) can be written as \(2(m + 1) + 2(n + 1)\) terms:
+Let the curve \(b_0(s)\) be of degree \(m\) and \(b_1(t)\) be of degree \(n\).
+Then \(F(s, t)\) can be written as \\ \(2(m + 1) + 2(n + 1)\) terms:
 \begin{equation}
 F(s, t) =
   \sum_{i = 0}^m c_i^{(1)} \left[ \begin{array}{c}
@@ -284,8 +284,8 @@ F(s, t) =
   0 \\ -B_{j, n}(t) \end{array}\right].
 \end{equation}
 Since \(F(s, t) = b_0(s) - b_1(t)\) we have Jacobian \(J(s, t) =
-\left[ \begin{array}{c c} b_0'(s) & -b_1'(t) \end{array}\right]\). Since
-a transversal intersection, we have
+\left[ \begin{array}{c c} b_0'(s) & -b_1'(t) \end{array}\right]\). Since we
+are considering a transversal intersection, we have
 \(\det J(\alpha, \beta) \neq 0\). In a perturbation, we replace each
 \(c_j^{(k)}\) with a \(\delta_j^{(k)}\) bounded by
 \(\left|\delta_j^{(k)}\right| \leq \eps \left|c_j^{(k)}\right|\).
@@ -314,7 +314,8 @@ where
 As in \eqref{eq:tri-ineq}, the bound can be attained by choosing the
 sign and magnitude of each perturbation so that
 \(\delta_j^{(k)} B_{j, d} = \eps \left|c_j^{(k)}\right| B_{j, d}\).
-The factor of \(\eps\) can be cancelled to give condition number
+The factor of \(\eps\) can be cancelled to give the relative root
+condition number
 \begin{align}
 \kappa_{\alpha, \beta} &= \frac{1}{\sqrt{\alpha^2 + \beta^2}}
   \sup_{\left|\nu_k\right| \leq \mu_k} \left \lVert \nu_1 \bm{v} +
@@ -385,7 +386,7 @@ Note that \(\widetilde{F}_{\pm} = \left[ \begin{array}{c} \mu_1 \\ \pm \mu_2
   2 \mu_1 \mu_2 \left(\bm{v} \cdot \bm{w}\right) +
   \mu_2^2 \left(\bm{w} \cdot \bm{w}\right)}
 \end{equation}
-gives each of the two values that could produce the maximum value.
+gives both values of which we take the maximum in \eqref{eq:kappa-max}.
 \end{proof}
 
 \section{Condition Number in Practice}
@@ -394,7 +395,7 @@ gives each of the two values that could produce the maximum value.
 
 Consider the line
 \(b_0(s) = \left[ \begin{array}{c} 2s \\ 2s \end{array}\right]\)
-and improperly parameterized line
+and quadratically parameterized line
 \(b_1(t) = \left[ \begin{array}{c} 4t^2 \\ 2 - 4t^2
 \end{array}\right]\) which intersect at \(\alpha = \beta = 1/2\).
 At the intersection we have \(J^{-1} = \frac{1}{8}
@@ -430,8 +431,9 @@ intersection is ill-conditioned.
 Consider the intersection of the lines \(y = x\) and \(y = 1 - x\) when
 \(x \in \left[0, 1\right]\). These correspond to the B\'{e}zier curves
 \begin{equation}
-b_0(s) = \left[ \begin{array}{c} s \\ s \end{array}\right], \quad
-b_1(t) = \left[ \begin{array}{c} t \\ 1 - t \end{array}\right].
+b_0(s) = s \left[ \begin{array}{c} 1 \\ 1 \end{array}\right], \quad
+b_1(t) = (1 - t) \left[ \begin{array}{c} 0 \\ 1 \end{array}\right] +
+t \left[ \begin{array}{c} 1 \\ 0 \end{array}\right].
 \end{equation}
 By adding a scalar \(D > 0\) to each component, we leave \(F(s, t)\) and hence
 the solution unchanged. However, the coefficients of the curves change:
@@ -492,7 +494,7 @@ The author would like to thank Professor Tom Sederberg for his useful
 course notes (\cite{SederbergNotes}) that provide a useful introduction to
 intersection methods as well as the survey \cite{Sederberg1986}. Additionally
 \cite{Farouki1987} served as a great baseline when considering conditioning
-of operations on B\'{e}zier Curves.
+of operations on B\'{e}zier curves.
 
 %% H/T: https://tex.stackexchange.com/a/137379/32270
 \section*{\refname}
