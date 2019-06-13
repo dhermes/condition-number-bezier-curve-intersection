@@ -8,7 +8,7 @@ This repository is laid out in a manner described in
 
 ## Abstract
 
-We present a short note describing a condition number
+We present a condition number
 of the intersection of two B&#xe9;zier curves. Since tangent
 intersections are to transversal intersections as multiple roots are
 to simple roots of a function, this condition number is infinite
