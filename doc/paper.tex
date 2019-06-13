@@ -149,7 +149,7 @@ Taking the derivative with respect to \(\delta\) we find that
 \phi_j\left(\bm{\alpha}\right)\), hence we
 conclude that
 \begin{equation}
-\bm{x}\left(\delta\right) = \bm{\alpha} - J\left(\bm{\alpha}\right)^{-1}
+\bm{x}\left(\delta\right) = \bm{\alpha} - J^{-1}\left(\bm{\alpha}\right)
   \phi_j\left(\bm{\alpha}\right) \delta + \bigO{\delta^2}.
 \end{equation}
 This gives
@@ -172,7 +172,7 @@ With this, we can define a root condition number
 \begin{definition}\label{defn:abstract-cond-num}
 For a smooth function \(F\left(\bm{x}\right) = \sum_j c_j
 \phi_j\left(\bm{x}\right)\) parameterized by the coefficients
-\(\left\{c_j\right\}\) with root \(\bm{\alpha}\) and Jacobian
+\(c_j\) with root \(\bm{\alpha}\) and Jacobian
 \(J\left(\bm{\alpha}\right)\), we define a relative root condition
 number
 \begin{equation}
@@ -199,6 +199,9 @@ the entire perturbation vector
   \left \lVert J^{-1} F_{\bm{c}} \right \rVert \frac{\left \lVert \bm{c}
   \right \rVert}{\left \lVert \bm{\alpha} \right \rVert}.
 \end{equation}
+where \(F_{\bm{c}} = \left[\begin{array}{c c c}
+\phi_0\left(\bm{\alpha}\right) & \cdots & \phi_n\left(\bm{\alpha}\right)
+\end{array}\right]^T\) is the vector of weight functions.
 While this has the benefit of having a closed form that is straightforward
 to compute, it may be less useful than the condition number given in
 Definition~\ref{defn:abstract-cond-num} since the larger coefficients
