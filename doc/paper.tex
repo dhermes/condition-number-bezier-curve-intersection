@@ -49,7 +49,7 @@
 \address[djh]{UC Berkeley, 970 Evans Hall \#3840, Berkeley, CA 94720-3840 USA}
 
 \begin{abstract}
-We present a short note describing a condition number
+We present a condition number
 of the intersection of two B\'{e}zier curves.
 \end{abstract}
 
@@ -91,23 +91,25 @@ a family of intersections approach an ill-behaved intersection.
 
 \section{Preliminaries}
 
-Throughout, we'll refer to a \emph{B\'{e}zier curve} as a parametric
+Throughout, we will refer to a parametric polynomial
 plane curve given by
 \begin{equation}
 b(s) = \sum_{j = 0}^n \bm{b}_j B_{j, n}(s)
 \end{equation}
+as a \emph{B\'{e}zier curve},
 where \(B_{j, n}(s) = \binom{n}{j} (1 - s)^{n - j} s^j\) is a Bernstein
 polynomial.
 When the parameter \(s \in \left[0, 1\right]\), the coefficients
 \(B_{j, n}(s) \in \left[0, 1\right]\) as well and the evaluation is a convex
-combination of the set of \emph{control points} \(\bm{b}_j \in \reals^2\).
+combination of the \emph{control points} \(\bm{b}_j \in \reals^2\).
 
-A B\'{e}zier curve intersection is a root \(\left[\begin{array}{c}
+An intersection of two planar curves \(b_0(s)\) and \(b_1(t)\) corresponds to
+a root \(\left[\begin{array}{c}
 \alpha \\ \beta \end{array}\right]\) of the function
 \begin{equation}
-F(s, t) = b_0(s) - b_1(t)
+F(s, t) = b_0(s) - b_1(t).
 \end{equation}
-where \(b_0(s)\) and \(b_1(t)\) are B\'{e}zier curves. Note that
+Note that
 \(F: \reals^2 \longrightarrow \reals^2\).
 
 Each component \(x(s)\) and \(y(s)\) of a B\'{e}zier curve is a
@@ -125,12 +127,14 @@ Consider a smooth function \(F: \reals^n \longrightarrow \reals^n\)
 with Jacobian \(F_{\bm{x}} = J\). We want to consider a special class of
 functions of the form \(F\left(\bm{x}\right) = \sum_j c_j
 \phi_j\left(\bm{x}\right)\) where the basis
-functions \(\phi_j\) are also smooth functions on \(\reals^n\)
+functions \(\phi_j\) are also smooth functions
+\(\reals^n \longrightarrow \reals^n\)
 and each \(c_j \in \reals\). We want to consider the effects on a root
 \(\bm{\alpha} \in \reals^n\) of a perturbation in one of the
 coefficients \(c_j\). We examine the perturbed function
 \begin{equation}
-G(x, \delta) = F\left(\bm{x}\right) + \delta \phi_j\left(\bm{x}\right).
+G\left(\bm{x}, \delta\right) = F\left(\bm{x}\right) +
+\delta \phi_j\left(\bm{x}\right).
 \end{equation}
 Since \(G\left(\bm{\alpha}, 0\right) = \bm{0}\), if \(J^{-1}\) exists at
 \(\bm{x} = \bm{\alpha}\) then
@@ -140,8 +144,8 @@ the implicit function theorem tells us that we can define
 G\left(\bm{x}\left(\delta\right), \delta\right) = \bm{0}.
 \end{equation}
 Taking the derivative with respect to \(\delta\) we find that
-\(\bm{0} = G_{\bm{x}} \bm{x}_{\delta} + G_{\delta}\). Plugging in
-\(\delta = 0\) we find that \(0 = J\left(\bm{\alpha}\right) \bm{x}_{\delta} +
+\(\bm{0} = G_{\bm{x}} \bm{x}' + G_{\delta}\). Plugging in
+\(\delta = 0\) we find that \(0 = J\left(\bm{\alpha}\right) \bm{x}' +
 \phi_j\left(\bm{\alpha}\right)\), hence we
 conclude that
 \begin{equation}
