@@ -216,7 +216,7 @@ Higham condition number has a closed form since
 for any matrix norm that is compatible with the vector norm used on
 \(\bm{\delta}\). The Frobenius matrix norm and Euclidean vector norm can be
 combined to give a condition number that is straightforward to compute:
-\begin{equation}
+\begin{equation}\label{eq:higham-cond-num}
   \kappa_H = \left \lVert J^{-1} F_{\bm{c}} \right \rVert_F
   \frac{\left \lVert \bm{c}
   \right \rVert_2}{\left \lVert \bm{\alpha} \right \rVert_2}.
@@ -444,6 +444,34 @@ a double root:
 \end{align}
 so an algebraic approach may lead to an incorrect conclusion that the
 intersection is ill-conditioned.
+
+\subsection{Collapsing to One-dimensional Case}
+
+One key argument for choosing Definition~\ref{defn:abstract-cond-num} over
+the Highham condition number \(\kappa_H\) from~\eqref{eq:higham-cond-num} is
+that \(\kappa_{\bm{\alpha}}\) is a natural extension of the condition number
+for the equivalent one-dimensional problem. To see that this is so, we'll
+define a "trivial" example by starting with a polynomial \(p(s)\) in Bernstein
+form and a simple root \(\alpha\).
+
+We define the B\'{e}zier curves \(b_0(s) = \left[ \begin{array}{c} p(s) \\ 0
+\end{array}\right]\) and \(b_1(t) = \left[ \begin{array}{c} 0 \\ t
+\end{array}\right]\). These curves intersect when \(\beta = 0\) and
+\(\alpha\) is a root of \(p(s)\).
+At such an intersection \(\mu_1 = \widetilde{p}(\alpha) + 0\),
+\(\mu_2 = 0 + \beta = 0\) and
+\begin{equation}
+J^{-1} = \left[ \begin{array}{c c} 1 / p'(\alpha) & 0 \\ 0 & -1 \end{array}\right]
+\end{equation}
+so that \(\bm{v} \cdot \bm{v} = 1 / \left[p'(\alpha)\right]^2\), \(\bm{v} \cdot
+\bm{w} = 0\) and \(\bm{w} \cdot \bm{w} = 1\). This produces
+\begin{equation}
+  \kappa_{\alpha, 0} = \sqrt{\frac{\mu_1^2 \left(\bm{v} \cdot \bm{v}\right) +
+  0 + 0}{\alpha^2 + 0}} = \frac{\widetilde{p}(\alpha)}{\left|\alpha
+  p'(\alpha)\right|},
+\end{equation}
+the commonly used condition number presented
+in~\eqref{eq:bernstein-cond-num}.
 
 \subsection{Line-line Intersection with Poorly Behaved Coefficients}
 
