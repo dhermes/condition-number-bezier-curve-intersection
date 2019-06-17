@@ -462,9 +462,9 @@ intersection is ill-conditioned.
 Consider the intersection of the lines \(y = x\) and \(y = 1 - x\) when
 \(x \in \left[0, 1\right]\). These correspond to the B\'{e}zier curves
 \begin{equation}
-b_0(s) = s \left[ \begin{array}{c} 1 \\ 1 \end{array}\right], \quad
-b_1(t) = (1 - t) \left[ \begin{array}{c} 0 \\ 1 \end{array}\right] +
-t \left[ \begin{array}{c} 1 \\ 0 \end{array}\right].
+b_0(s) = \left[ \begin{array}{c} 1 \\ 1 \end{array}\right] s, \quad
+b_1(t) = \left[ \begin{array}{c} 0 \\ 1 \end{array}\right] (1 - t) +
+\left[ \begin{array}{c} 1 \\ 0 \end{array}\right] t.
 \end{equation}
 By adding a scalar \(D > 0\) to each component, we leave \(F(s, t)\) and hence
 the solution unchanged. However, the coefficients of the curves change:
