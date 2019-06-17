@@ -461,14 +461,14 @@ b_0(s) = \left[ \begin{array}{c} D(1 - s) + (1 + D)s \\ D(1 - s) + (1 + D)s
   \end{array}\right], \quad b_1(t) = \left[ \begin{array}{c}
   D(1 - t) + (1 + D)t \\ (1 + D)(1 - t) + Dt \end{array}\right].
 \end{equation}
-At the solution \(\alpha = \beta = 1/2\), we have
+At the solution \(\alpha = \beta = 1/2\), we have \(\mu_1 = \mu_2 = 2D + 1\)
+and
 \begin{equation}
-\widetilde{F}_{\pm} = \left[ \begin{array}{c} 2D + 1 \\ \pm(2D + 1)
-  \end{array}\right]
+J^{-1} = \frac{1}{2}
+\left[ \begin{array}{c c} 1 & 1 \\ -1 & 1 \end{array}\right]
 \end{equation}
-and in either case \(\left \lVert J^{-1} \widetilde{F}_{\pm} \right \rVert_2 =
-2D + 1\).
-
+so that \(\bm{v} \cdot \bm{v} = \bm{w} \cdot \bm{w} =
+1/2\) and \(\bm{v} \cdot \bm{w} = 0\).
 So, we see the condition number \(\kappa_{\alpha, \beta} = \sqrt{2}(2D + 1)\)
 increases towards infinity as \(D\) does. This is what we expect as the
 coefficients grow so large that their ratio \((1 + D) / D\) approaches \(1\).
@@ -486,9 +486,13 @@ These lines \(y = 1\) and \(rx + y = 1 + r\) intersect when
 become coincident: if \(r = 0\) the single intersection becomes infinitely
 many.
 
-At the solution, we have \(\widetilde{F}_{\pm} = \left[ \begin{array}{c c}
-2 & \pm 2 \end{array}\right]^T\)
-and again have a condition number
+At the solution, we have \(\mu_1 = \mu_2 = 2\) and
+\begin{equation}
+J^{-1} = \frac{1}{r}
+\left[ \begin{array}{c c} r & 1 \\ 0 & 1 \end{array}\right]
+\end{equation}
+so that \(\bm{v} \cdot \bm{v} = 1\), \(\bm{v} \cdot \bm{w} =
+1/r\) and \(\bm{w} \cdot \bm{w} = 2/r^2\). Again have a condition number
 \begin{equation}
 \kappa_{\alpha, \beta} = \sqrt{\frac{4}{r^2} + \frac{4}{r} + 2} =
   \frac{2}{r} + 1 + \frac{r}{4} + \bigO{r^2}.
