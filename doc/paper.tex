@@ -214,7 +214,7 @@ Higham condition number has a closed form since
   \bm{c} \right \rVert
 \end{equation}
 for any matrix norm that is compatible with the vector norm used on
-\(\bm{\delta}\). The Frobenius matrix norm and Euclidean vector norm can be
+\(\bm{\delta}\). The Frobenius matrix norm and vector 2-norm can be
 combined to give a condition number that is straightforward to compute:
 \begin{equation}\label{eq:higham-cond-num}
   \kappa_H = \left \lVert J^{-1} F_{\bm{c}} \right \rVert_F
@@ -231,7 +231,7 @@ by \(\left|\delta_j\right| \leq \eps \left|c_j\right|\) and allows
 perturbations in zero coefficients.
 When specialized to planar B\'{e}zier curves, we'll show in
 Theorem~\ref{thm:kappa-closed-form} that \(\kappa_{\alpha}\) has a closed form
-as well\footnote{When the Euclidean norm is used}. In addition, this closed
+as well\footnote{When the 2-norm is used}. In addition, this closed
 form shows that \(\kappa_{\alpha}\) is a natural extension of the
 one-dimensional equivalent given in~\eqref{eq:bernstein-cond-num} below.
 
