@@ -22,7 +22,7 @@ for non-transveral intersections.
 
 The code used to build the manuscript, generate images and verify
 computations is written in Python. To run the code, Python 3.7
-should be installed, along with ``nox``:
+should be installed, along with `nox`:
 
 ```
 python -m pip install --upgrade 'nox >= 2018.10.17' 'py >= 1.6.0'
@@ -36,8 +36,8 @@ Available sessions:
 * build_tex
 ```
 
-To run ``nox -s build_tex`` (i.e. to build the PDF), ``pdflatex`` and
-``bibtex`` are required.
+To run `nox -s build_tex` (i.e. to build the PDF), `pdflatex` and
+`bibtex` are required.
 
 [1]: https://github.com/dhermes/phd-thesis
 [2]: https://arxiv.org/abs/1609.00037
