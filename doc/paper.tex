@@ -191,23 +191,49 @@ number
 
 In \cite[Chapter~25, Section 25.4]{Higham2002} a similar definition is
 given. Instead of bounding the perturbations component-wise, it bounds
-the entire perturbation vector
+the entire perturbation vector \(\bm{\delta}\)
 \begin{equation}
   \lim_{\eps \to 0} \left(\sup_{\left \lVert \bm{\delta} \right \rVert \leq
   \eps \left \lVert \bm{c} \right \rVert} \frac{\left \lVert
   J^{-1}\left(\bm{\alpha}\right) \sum_j \delta_j
   \phi_j\left(\bm{\alpha}\right) \right \rVert / \eps}{
-  \left \lVert \bm{\alpha} \right \rVert}\right) =
-  \left \lVert J^{-1} F_{\bm{c}} \right \rVert \frac{\left \lVert \bm{c}
-  \right \rVert}{\left \lVert \bm{\alpha} \right \rVert}.
+  \left \lVert \bm{\alpha} \right \rVert}\right).
 \end{equation}
-where \(F_{\bm{c}} = \left[\begin{array}{c c c}
-\phi_0\left(\bm{\alpha}\right) & \cdots & \phi_n\left(\bm{\alpha}\right)
-\end{array}\right]^T\) is the vector of weight functions.
-While this has the benefit of having a closed form that is straightforward
-to compute, it may be less useful than the condition number given in
-Definition~\ref{defn:abstract-cond-num} since the larger coefficients
-can dominate the rest.
+It's possible to rewrite \(\sum_j \delta_j \phi_j\left(\bm{\alpha}\right) =
+F_{\bm{c}} \bm{\delta}\) where \(F_{\bm{c}} =
+\left[\frac{\partial F_i}{\partial c_j}\right]_{ij} =
+\left[\begin{array}{c c c} \phi_0\left(\bm{\alpha}\right) & \cdots &
+\phi_n\left(\bm{\alpha}\right) \end{array}\right]\) is the Jacobian of \(F\)
+with respect to the coefficients \(\bm{c}\). With this representation, the
+Higham condition number has a closed form since
+\begin{equation}
+  \left \lVert
+  J^{-1} F_{\bm{c}} \bm{\delta} \right \rVert / \eps \leq
+  \left \lVert J^{-1} F_{\bm{c}} \right \rVert \left \lVert \bm{\delta} \right
+  \rVert / \eps \leq \left \lVert J^{-1} F_{\bm{c}} \right \rVert \left \lVert
+  \bm{c} \right \rVert
+\end{equation}
+for any matrix norm that is compatible with the vector norm used on
+\(\bm{\delta}\). The Frobenius matrix norm and Euclidean vector norm can be
+combined to give a condition number that is straightforward to compute:
+\begin{equation}
+  \kappa_H = \left \lVert J^{-1} F_{\bm{c}} \right \rVert_F
+  \frac{\left \lVert \bm{c}
+  \right \rVert_2}{\left \lVert \bm{\alpha} \right \rVert_2}.
+\end{equation}
+
+While this closed form for \(\kappa_H\) is useful, it provides a less sharp
+measure than the condition number \(\kappa_{\bm{\alpha}}\) given in
+Definition~\ref{defn:abstract-cond-num} since the ball \(\left \lVert
+\bm{\delta} \right \rVert_2 \leq \eps \left \lVert \bm{c} \right \rVert_2\)
+can allow larger perturbations of a single coefficient than the box determined
+by \(\left|\delta_j\right| \leq \eps \left|c_j\right|\) and allows
+perturbations in zero coefficients.
+When specialized to planar B\'{e}zier curves, we'll show in
+Theorem~\ref{thm:kappa-closed-form} that \(\kappa_{\alpha}\) has a closed form
+as well\footnote{When the Euclidean norm is used}. In addition, this closed
+form shows that \(\kappa_{\alpha}\) is a natural extension of the
+one-dimensional equivalent given in~\eqref{eq:bernstein-cond-num} below.
 
 \subsection{One-dimensional Case}
 
@@ -225,7 +251,7 @@ hence for these values equality holds in the triangle inequality:
 \eps \sum_{j = 0}^n \left|c_j \phi_j(\alpha)\right|.
 \end{equation}
 Thus we get a root condition number for a polynomial given in Bernstein form
-\begin{equation}
+\begin{equation}\label{eq:bernstein-cond-num}
 \kappa_{\alpha} =
   \frac{1}{\left|\alpha F'(\alpha)\right|} \sum_{j = 0}^n \left|
   c_j \phi_j(\alpha)\right| =
@@ -249,7 +275,7 @@ We can show that there is a closed form for the condition number given
 by Definition~\ref{defn:abstract-cond-num}, specialized to the
 2-norm.
 
-\begin{theorem}
+\begin{theorem}\label{thm:kappa-closed-form}
 Let \(\left[\begin{array}{c} \alpha \\ \beta
 \end{array}\right]\) be a transversal intersection of two planar
 B\'{e}zier curves \(b_0(s)\) and \(b_1(t)\). Define the vectors
