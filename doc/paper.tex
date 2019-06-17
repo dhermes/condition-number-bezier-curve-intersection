@@ -156,7 +156,7 @@ conclude that
 \end{equation}
 This gives
 \begin{equation}
-\frac{\left \lVert J\left(\bm{\alpha}\right)^{-1}
+\frac{\left \lVert J^{-1}\left(\bm{\alpha}\right)
   \phi_j\left(\bm{\alpha}\right) \right \rVert}{
   \left \lVert \bm{\alpha} \right \rVert}.
 \end{equation}
@@ -166,7 +166,7 @@ By considering perturbations in \emph{all} of the coefficients:
 gives a root function
 \begin{equation}
 \bm{x}\left(\delta_0, \ldots, \delta_n\right) = \bm{\alpha} -
-  J\left(\bm{\alpha}\right)^{-1} \sum_{j = 0}^n \delta_j
+  J^{-1}\left(\bm{\alpha}\right) \sum_{j = 0}^n \delta_j
   \phi_j\left(\bm{\alpha}\right) + \bigO{\eps^2}.
 \end{equation}
 With this, we can define a root condition number
@@ -183,7 +183,7 @@ number
   \right \rVert / \eps}{\left \lVert\bm{\alpha}\right \rVert} =
   \lim_{\eps \to 0} \left(\sup_{\left|\delta_j\right| \leq
   \eps \left|c_j\right|} \frac{\left \lVert
-  J\left(\bm{\alpha}\right)^{-1} \sum_j \delta_j
+  J^{-1}\left(\bm{\alpha}\right) \sum_j \delta_j
   \phi_j\left(\bm{\alpha}\right) \right \rVert / \eps}{
   \left \lVert\bm{\alpha}\right \rVert}\right).
 \end{equation}
@@ -195,7 +195,7 @@ the entire perturbation vector
 \begin{equation}
   \lim_{\eps \to 0} \left(\sup_{\left \lVert \bm{\delta} \right \rVert \leq
   \eps \left \lVert \bm{c} \right \rVert} \frac{\left \lVert
-  J\left(\bm{\alpha}\right)^{-1} \sum_j \delta_j
+  J^{-1}\left(\bm{\alpha}\right) \sum_j \delta_j
   \phi_j\left(\bm{\alpha}\right) \right \rVert / \eps}{
   \left \lVert \bm{\alpha} \right \rVert}\right) =
   \left \lVert J^{-1} F_{\bm{c}} \right \rVert \frac{\left \lVert \bm{c}
@@ -267,8 +267,8 @@ Then the root condition number of the intersection is the
 greater of two vector norms:
 \begin{equation}\label{eq:kappa-max}
 \kappa_{\alpha, \beta} = \frac{1}{\sqrt{\alpha^2 + \beta^2}} \max \left\{
-\left \lVert J\left(\alpha, \beta\right)^{-1} \widetilde{F}_{+}\right \rVert_2,
-\left \lVert J\left(\alpha, \beta\right)^{-1} \widetilde{F}_{-}\right \rVert_2
+\left \lVert J^{-1}\left(\alpha, \beta\right) \widetilde{F}_{+}\right \rVert_2,
+\left \lVert J^{-1}\left(\alpha, \beta\right) \widetilde{F}_{-}\right \rVert_2
 \right\}.
 \end{equation}
 \end{theorem}
@@ -296,7 +296,7 @@ are considering a transversal intersection, we have
 Writing \(J^{-1} = \left[ \begin{array}{c c}
 \bm{v} & \bm{w} \end{array}\right]\), we have
 \begin{multline}
-J\left(\bm{\alpha}\right)^{-1} \sum_j \delta_j
+J^{-1}\left(\bm{\alpha}\right) \sum_j \delta_j
   \phi_j\left(\bm{\alpha}\right) =
   \left[\sum_{i = 0}^m \delta_i^{(1)} B_{i, m}(\alpha) +
   \sum_{j = 0}^n \delta_j^{(3)} B_{j, n}(\beta)\right] \bm{v} \\
@@ -383,7 +383,7 @@ rectangle. Due to sign cancellation, this leads to one of two values
 Note that \(\widetilde{F}_{\pm} = \left[ \begin{array}{c} \mu_1 \\ \pm \mu_2
 \end{array}\right]\), so
 \begin{equation}
-\left \lVert J\left(\alpha, \beta\right)^{-1} \widetilde{F}_{\pm}
+\left \lVert J^{-1}\left(\alpha, \beta\right) \widetilde{F}_{\pm}
   \right \rVert_2 = \left \lVert \left[ \begin{array}{c c} \bm{v} & \bm{w}
   \end{array}\right] \widetilde{F}_{\pm} \right \rVert_2 =
   \sqrt{\mu_1^2 \left(\bm{v} \cdot \bm{v}\right) \pm
