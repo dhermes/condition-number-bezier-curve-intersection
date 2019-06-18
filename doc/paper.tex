@@ -301,7 +301,7 @@ and the \(\widetilde{x}_i, \widetilde{y}_j\) are as defined in
 \begin{proof}
 Let the curve \(b_0(s)\) be of degree \(m\) and \(b_1(t)\) be of degree \(n\).
 Then \(F(s, t)\) can be written as \\ \(2(m + 1) + 2(n + 1)\) terms:
-\begin{equation}
+\begin{equation}\label{eq:bezier-full-basis}
 F(s, t) =
   \sum_{i = 0}^m c_i^{(1)} \left[ \begin{array}{c}
   B_{i, m}(s) \\ 0 \end{array}\right] +
@@ -407,6 +407,38 @@ rectangle. Due to sign cancellation, this leads to one of two values
 \end{equation}
 as desired.
 \end{proof}
+
+With this closed form \(\kappa_{\alpha, \beta}\) in hand, we can now compare
+to the Higham condition number \(\kappa_H\) from~\eqref{eq:higham-cond-num}.
+We'll show that \(\kappa_{\alpha, \beta} \leq \kappa_H\) by comparing
+\(\kappa_{\alpha, \beta}^2 \left(\alpha^2 + \beta^2\right)\)
+to \(\kappa_H^2 \left(\alpha^2 + \beta^2\right) = \left \lVert J^{-1}
+F_{\bm{c}} \right \rVert_F^2 \left \lVert \bm{c} \right \rVert_2^2\).
+In the case of planar curves with basis as in~\eqref{eq:bezier-full-basis},
+\begin{equation}
+  \left \lVert J^{-1} F_{\bm{c}} \right \rVert_F^2 =
+  \left[\left \lVert \bm{v} \right \rVert_2^2 + \left \lVert \bm{w}
+  \right \rVert_2^2 \right] W \quad \text{where} \quad W =
+  \sum_{i = 0}^m B_{i, m}^2(\alpha) + \sum_{j = 0}^n B_{j, n}^2(\beta)
+\end{equation}
+is the sum of squared Bernstein weights.
+With two applications of the Cauchy-Schwarz inequality we know that
+\begin{equation}
+  \kappa_{\alpha, \beta}^2 \left(\alpha^2 + \beta^2\right) \leq
+  \left(\mu_1 \left \lVert \bm{v} \right \rVert_2 + \mu_2 \left \lVert \bm{w}
+  \right \rVert_2\right)^2 \leq \left(\mu_1^2 + \mu_2^2\right) \left[
+  \left \lVert \bm{v} \right \rVert_2^2 + \left \lVert \bm{w}
+  \right \rVert_2^2 \right].
+\end{equation}
+So it remains to show that \(\mu_1^2 + \mu_2^2 \leq W \left \lVert \bm{c}
+\right \rVert_2^2\), which can be done with another application of
+Cauchy-Schwarz to the terms in \(\mu_1\) and \(\mu_2\):
+\begin{equation}
+  \mu_1^2 + \mu_2^2 \leq \left(\sum_{i = 0}^m \left|c_i^{(1)}\right|^2 +
+  \sum_{j = 0}^n \left|c_j^{(3)}\right|^2 \right) W + \left(\sum_{i = 0}^m
+  \left|c_i^{(2)}\right|^2 + \sum_{j = 0}^n \left|c_j^{(4)}\right|^2 \right) W
+  = W \left \lVert \bm{c} \right \rVert_2^2.
+\end{equation}
 
 \section{Condition Number in Practice}
 
