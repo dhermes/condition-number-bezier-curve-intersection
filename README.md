@@ -8,7 +8,9 @@ This repository is laid out in a manner described in
 
 The content itself has been uploaded to the [arXiv][4] and was submitted to
 the journal [CAGD][5] in April 2019. The submission received reviewer comments
-in June 2019 and a second revision has been submitted to the journal.
+in June 2019 and a second revision was submitted to the journal. A second
+round of reviewer comments were received in October 2019 and a third revision
+has been submitted as well.
 
 ## Abstract
 
