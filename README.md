@@ -1,5 +1,9 @@
 # A Condition Number for B&#xe9;zier Curve Intersection
 
+| Cite paper           |
+| -------------------- |
+| [![Paper DOI][8]][6] |
+
 This originally appeared in my [thesis][1] and is now split out
 into a (short) standalone [paper][3].
 
@@ -7,18 +11,31 @@ This repository is laid out in a manner described in
 [Good Enough Practices in Scientific Computing][2].
 
 The content itself has been uploaded to the [arXiv][4] and was submitted to
-the journal [CAGD][5] in April 2019. The submission received reviewer comments
-in June 2019 and a second revision was submitted to the journal. A second
-round of reviewer comments were received in October 2019 and a third revision
-has been submitted as well.
+the journal [CAGD][5] in April 2019. The paper has been accepted and was
+[published][6] [on][7] November 8, 2019.
 
 ## Abstract
 
-We present a condition number
-of the intersection of two B&#xe9;zier curves. Since tangent
-intersections are to transversal intersections as multiple roots are
-to simple roots of a function, this condition number is infinite
-for non-transveral intersections.
+We present a condition number of the intersection of two B&#xe9;zier curves.
+
+## Citation
+
+To cite this paper:
+
+```
+@article{Hermes2019,
+  doi = {10.1016/j.cagd.2019.101791},
+  url = {https://doi.org/10.1016/j.cagd.2019.101791},
+  year = {2019},
+  month = {Nov},
+  publisher = {Elsevier {BV}},
+  volume = {75},
+  pages = {101791},
+  author = {Danny Hermes},
+  title = {A 2-norm condition number for B{\'{e}}zier curve intersection},
+  journal = {Computer Aided Geometric Design}
+}
+```
 
 ## Installation
 
@@ -46,3 +63,6 @@ To run `nox -s build_tex` (i.e. to build the PDF), `pdflatex` and
 [3]: doc/paper.pdf
 [4]: https://arxiv.org/abs/1808.06126
 [5]: https://www.journals.elsevier.com/computer-aided-geometric-design
+[6]: https://doi.org/10.1016/j.cagd.2019.101791
+[7]: doc/1-s2.0-S0167839619301001-main.pdf
+[8]: https://img.shields.io/badge/DOI-10.1016%2Fj.cagd.2019.101791-blue.svg

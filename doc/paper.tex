@@ -10,8 +10,12 @@
 \counterwithin{equation}{section}
 %% H/T: https://tex.stackexchange.com/a/26348/32270
 \renewcommand*{\appendixname}{}
-%% H/T: https://tex.stackexchange.com/a/23242/32270
-\renewcommand*{\today}{April 7, 2019}
+\renewcommand*{\today}{November 8, 2019}
+%% Initial Submission: April 7, 2019
+%% First Revision: June 17, 2019
+%% Second Revision: October 17, 2019
+%% Accepted: October 24, 2019
+%% Published: November 8, 2019
 
 \theoremstyle{definition}
 \newtheorem{theorem}{Theorem}[section]
@@ -32,7 +36,16 @@
 \newcommand{\bigO}[1]{\mathcal{O}\left(#1\right)}
 \newcommand{\eps}{\varepsilon}
 
-\journal{Computer Aided Geometric Design}
+%% \journal{Computer Aided Geometric Design}
+\makeatletter
+\def\ps@pprintTitle{%
+  \let\@oddhead\@empty
+  \let\@evenhead\@empty
+  \def\@oddfoot{\footnotesize\itshape
+    Published in Computer Aided Geometric Design (\cite{Hermes2019})
+      \hfill November 8, 2019}%
+  \let\@evenfoot\@oddfoot}
+\makeatother
 
 \begin{document}
 %% H/T: https://tex.stackexchange.com/a/263503/32270
