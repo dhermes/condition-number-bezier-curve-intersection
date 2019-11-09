@@ -44,15 +44,18 @@ computations is written in Python. To run the code, Python 3.7
 should be installed, along with `nox`:
 
 ```
-python -m pip install --upgrade 'nox >= 2018.10.17' 'py >= 1.6.0'
+python -m pip install --upgrade 'nox >= 2019.8.20' 'py >= 1.6.0'
 ```
 
 Once installed, the various build jobs can be listed. For example:
 
 ```
 $ nox --list-sessions
-Available sessions:
+Sessions defined in .../condition-number-bezier-curve-intersection/noxfile.py:
+
 * build_tex
+
+sessions marked with * are selected, sessions marked with - are skipped.
 ```
 
 To run `nox -s build_tex` (i.e. to build the PDF), `pdflatex` and
