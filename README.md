@@ -1,4 +1,4 @@
-# A Condition Number for B&#xe9;zier Curve Intersection
+# A 2-Norm Condition Number for B&#xe9;zier Curve Intersection
 
 | Cite paper           |
 | -------------------- |
